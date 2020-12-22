@@ -1,0 +1,60 @@
+
+<%- include("parts/head")%>
+
+<%- include("parts/navbar")%>
+
+  <div class="container text-center">
+
+    <h2>Create Acount</h2>
+
+    <form action="/signup" method="post">
+
+        <input type="text" name="name" class="form-control m-2" placeholder="User Name">
+        <%let nameerr = errs.find(err => err.param === "name")%>
+        <% if(nameerr) { %>
+        <div class="alert alert-danger">
+            <h2>
+              <%= nameerr.msg%>
+            </h2>
+        </div>
+        <% } %>
+        <input type="email" name="email" class="form-control m-2" placeholder="Email"> 
+        <%let emailerr = errs.find(err => err.param === "email")%>
+        <% if(emailerr) { %>
+        <div class="alert alert-danger">
+            <h2>
+              <%= emailerr.msg%>
+            </h2>
+        </div>
+        <% } %>
+        <input type="password" name="password" class="form-control m-2" placeholder="Password" id="">
+        <%let passworderr = errs.find(err => err.param === "password")%>
+        <% if(passworderr) { %>
+        <div class="alert alert-danger">
+            <h2>
+              <%= passworderr.msg%>
+            </h2>
+        </div>
+        <% } %>
+        <input type="password" name="confirmpassword" class="form-control m-2" placeholder="Confirm Password" id="">
+        <%let confirmpassworderr = errs.find(err => err.param === "confirmpassword")%>
+        <% if(confirmpassworderr) { %>
+        <div class="alert alert-danger">
+            <h2>
+              <%= confirmpassworderr.msg%>
+            </h2>
+        </div>
+        <% } %>
+        <input type="submit" value="Create Acount" class="btn btn-primary m-2">
+
+    </form>
+
+    <hr>
+    
+    <div>
+        <h4>Already Has Acount ?</h4><a href="/login" class="btn btn-success">Login</a>
+    </div>
+       
+  </div>
+
+<%- include("parts/footer")%>

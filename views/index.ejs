@@ -1,0 +1,71 @@
+<%- include("parts/head")%>
+
+<%- include("parts/navbar")%>
+
+<div class="container">
+          <form action="/" method="GET" class="row mt-2">
+              <select name="category" class="col form-control">
+                  <option value="all">All</option>
+                  <option value="animal">Animal</option>
+                  <option value="womans">Womans</option>
+                  <option value="travel">Travel</option>
+                </select>
+                <div class="col text-center">
+              <input type="submit" value="filter" class="filter btn btn-primary"> 
+            </div> 
+          </form>                       
+     
+     <% if(err) { %>
+      <div class="alert alert-danger">
+          <h2>
+              <%= err.msg%>
+          </h2>
+      </div>
+    <% } %>
+
+    <%if(products.length == 0 ) {%>
+       <div class="alert alert-danger mt-2">
+           <h2>
+             there is no products
+           </h2>
+       </div>
+    <%} else {%>
+       <div class="row">
+          <% for (let product of products) { %>
+            <div class="col col-12 col-md-6 col-lg-4 col-xl-3 p-2">
+                <div class="card " style="width: 18rem;">
+                    <img src="<%= product.image %>" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <a href="/product/<%= product._id %> "> <%= product.name %> </a> 
+                            <p class="mt-2">Price: <%= product.price %> $</p> 
+                        </h5>
+                        <%if (isuser) { %>
+                        <form action="/card" method="post">
+                          <input type="number" name="amount" class="form-control">
+                          <input type="hidden" name="name" value=" <%= product.name %> ">
+                          <input type="hidden" name="price" value=" <%= product.price %> ">
+                          <input type="hidden" name="productid" value=" <%= product._id %> ">
+                          <input type="hidden" name="redirect" value="/">
+                          <input type="submit" value="add to cart" class="btn btn-primary mt-2">  
+                        </form>
+                        <% } %>
+
+                    
+                    </div>
+                </div>
+            </div>
+          <%}%>       
+    </div>
+    <% } %>
+
+  </div>
+
+
+
+
+
+<%- include("parts/footer")%>
+  
+
+    

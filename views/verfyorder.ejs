@@ -1,0 +1,27 @@
+
+<%- include("parts/head")%>
+
+<%- include("parts/navbar")%>
+
+<div class="container text-center">
+    
+    <% if(err) { %>
+        <div class="alert alert-danger mt-2">
+            <h2>
+                    <%= err.msg%>
+            </h2>
+        </div>
+    <% } %>
+
+    <form action="/order"  method="post">
+        <input type="hidden" name="price" value="<%- cart.price %>">
+        <input type="hidden" name="amount" value="<%- cart.amount %>">
+        <input type="hidden" name="name" value="<%- cart.name %>">
+        <input type="hidden" name="productid" value="<%- cart.productid %>">
+        <input type="text" name="address" class="form-control mt-2" placeholder="Enter Your Address">
+        <input type="submit" value="Order" class="btn btn-primary" >
+    </form>
+
+</div>
+
+<%- include("parts/footer")%>

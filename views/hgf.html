@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="\css\bootstrap.min.css">
+  <link rel="stylesheet" href="">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">Navbar</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Link</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            Dropdown
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="#">Action</a>
+            <a class="dropdown-item" href="#">Another action</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">Something else here</a>
+          </div>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+        </li>
+      </ul>
+      <form class="form-inline my-2 my-lg-0">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      </form>
+    </div>
+  </nav>
+
+  <%- include("parts/head")%>
+
+  <%- include("parts/navbar")%>
+
+  <%- include("parts/footer")%>
+
+  <div class="container">
+
+  
+
+    <h2>Create Acount</h2>
+    <form action="/sinup" method="post">
+    <input type="text" name="name" class="form-control" placeholder="User Name">
+    <input type="email" name="email" class="form-control" placeholder="Email"> 
+    <input type="password" name="password" class="form-control" placeholder="Password" id="">
+    <input type="password" name="confirmpassword" class="form-control" placeholder="Confirm Password" id="">
+    <input type="submit" value="Create Acount" class="btn btn-primary">
+    </form>
+       <hr>
+       <div>
+         <h4>Already Has Acount</h4><a href="/login">Login</a>
+       </div>
+  </div>
+
+  <div class="container">
+
+      <h2>Login</h2>
+      <form action="/login" method="post">
+      <input type="email" name="email" class="form-control" placeholder="Email"> 
+      <input type="password" name="password" class="form-control" placeholder="Password" id="">
+      <input type="submit" value="Login" class="btn btn-primary">
+      
+      </form>
+         <hr>
+         <div>
+           <h4>Do Not Have Acount</h4><a href="/sinup">Sinup</a>
+         </div>
+    </div>
+
+    <table>
+      <thead>
+        <td>Number</td>
+        <td>Product Name</td>
+        <td>Price</td>
+        <td>Amount</td>
+        <td>Total</td>
+        <td></td>
+      </thead>
+      <tbody>
+        <%for (let i = 0; i < items.length; i++) { %>
+          <td><%- i+1 %></td>
+          <td><%- items[i].name %></td>
+          <td><%- items[i].price %></td>
+          <form method="post">
+            <td><input type="text" name="amount" class="form-control" value="<%- items[i].amount %>"></td>
+            <td><%- items[i].price * items[i].amount %> $</td>
+            <input type="hidden" name="cardid" value="<%- items[i]._id %>">
+            <input type="submit" value="Save" formaction="/card/save">
+            <input type="submit" value="Delete" formaction="/card/delete">
+          </form>
+        <% } %>
+      </tbody>
+    </table>
+   <form  method="post">
+    <input type="submit" value="Order All" formaction="/card/orderAll">
+    <input type="submit" value="Delete All" formaction="/card/deleteAll">
+   </form>
+
+    <script src="/js\jquery-3.3.1.min.js"></script>
+    <script src="\js\popper.min.js"></script>
+    <script src="\js\bootstrap.min.js"></script>
+</body>
+
+</html>

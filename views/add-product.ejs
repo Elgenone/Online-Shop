@@ -1,0 +1,59 @@
+
+<%- include("parts/head")%>
+
+<%- include("parts/navbar")%>
+
+  <div class="container text-center">
+
+    <h2>Add Product</h2>
+
+    <form action="/admin/add" method="post" enctype="multipart/form-data">
+
+        <input type="text" name="name" class="form-control m-2" placeholder="Product Name">
+        <%let nameerr = errs.find(err => err.param === "name")%>
+        <% if(nameerr) { %>
+        <div class="alert alert-danger">
+            <h2>
+              <%= nameerr.msg%>
+            </h2>
+        </div>
+        <% } %>
+        <input type="number" name="price" class="form-control m-2" placeholder="Price"> 
+        <%let emailerr = errs.find(err => err.param === "price")%>
+        <% if(emailerr) { %>
+        <div class="alert alert-danger">
+            <h2>
+              <%= emailerr.msg%>
+            </h2>
+        </div>
+        <% } %>
+        <textarea name="description" class="form-control m-2" placeholder="Description" id=""></textarea>
+        <%let passworderr = errs.find(err => err.param === "description")%>
+        <% if(passworderr) { %>
+        <div class="alert alert-danger">
+            <h2>
+              <%= passworderr.msg%>
+            </h2>
+        </div>
+        <% } %>
+        <select name="category" class="form-control mb-2 ">
+          <option value="animal">Animal</option>
+          <option value="womans">Womans</option>
+          <option value="travel">Travel</option>
+        </select>
+        <input type="file" name="image" class="form-control" placeholder="Image"  >
+        <%let imageerr = errs.find(err => err.param === "image")%>
+        <% if(imageerr) { %>
+        <div class="alert alert-danger">
+            <h2>
+              <%= imageerr.msg%>
+            </h2>
+        </div>
+        <% } %>
+        <input type="submit" value="Add Product" class="btn btn-primary m-2">
+
+    </form>
+       
+  </div>
+
+<%- include("parts/footer")%>

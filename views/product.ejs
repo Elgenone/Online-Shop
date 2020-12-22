@@ -1,0 +1,49 @@
+<%- include("parts/head")%>
+
+    <%- include("parts/navbar")%>
+
+        <div class="container">
+
+            <% if(!product){ %>
+
+                <div class="alert alert-danger">
+                    <h2>
+                        there is no product match this id
+                    </h2>
+                </div>
+
+                <% } else { %>
+
+                    <div class="row">
+                        <div class="col col-12 col-md-4">
+                            <img src="/<%= product.image %>" class="img-fluid p-2" alt="...">
+                            <%if (isuser) { %>
+                            <form action="/card" method="post">
+                                <input type="number" name="amount" class="form-control ">
+                                <input type="hidden" name="name" value=" <%= product.name %> ">
+                                <input type="hidden" name="price" value=" <%= product.price %> ">
+                                <input type="hidden" name="productid" value=" <%= product._id %> ">
+                                <input type="hidden" name="redirect" value="/product">
+                                <input type="submit" value="add to card" class="btn btn-primary mt-2">
+                            </form>
+                            <% } %>
+                        </div>
+
+                        <div class="col col-12 col-md-4">
+                            <h2>
+                                <%= product.name %>
+                            </h2>
+                            <h4>Catagory : <%= product.categore %>
+                            </h4>
+                            <h4>Price : <%= product.price %>$</h4>
+                            <p>Description : <%= product.description %>
+                            </p>
+                        </div>
+                    </div>
+
+                    <% } %>
+
+
+        </div>
+
+        <%- include("parts/footer")%>

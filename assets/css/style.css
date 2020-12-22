@@ -1,0 +1,15 @@
+
+*{
+    box-sizing: border-box;
+    /*font-family: Arial, Helvetica, sans-serif;*/
+}
+.navbar-dark .navbar-brand {
+    color: #03b9ff;
+}
+
+.filter{
+    padding-left: 100px;
+    padding-right: 100px;
+    font-size: 18px;
+
+}

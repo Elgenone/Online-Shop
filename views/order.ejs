@@ -1,0 +1,61 @@
+<%- include("parts/head")%>
+
+    <%- include("parts/navbar")%>
+
+        <div class="container">
+            <% if(items.length===0) { %>
+                <div class="alert alert-danger mt-2">
+                    <h2>
+                        There is No Orders
+                    </h2>
+                </div>
+                <% } else { %>
+                    <table class="table table-bordered table-dark table-hover mt-2">
+                        <thead>
+                            <th>Number</th>
+                            <th>Product Name</th>
+                            <th>Amount</th>
+                            <th>Total Price</th>
+                            <th>status</th>
+                            <th>Address</th>
+                            <th></th>
+                        </thead>
+                        <tbody>
+                            <%for (let i=0; i < items.length; i++) { %>
+                                <tr>
+                                    <td>
+                                        <%- i+1 %>
+                                    </td>
+                                    <td>
+                                        <%- items[i].name %>
+                                    </td>
+                                    <td>
+                                        <%- items[i].amount %>
+                                    </td>
+                                    <td>
+                                        <%- items[i].price * items[i].amount %> $
+                                    </td>
+                                    <td>
+                                        <%- items[i].status %>
+                                    </td>
+                                    <td>
+                                        <%- items[i].address %>
+                                    </td>
+                                    <form method="post">
+                                        <td>
+                                            <input type="hidden" name="orderid" value="<%- items[i]._id %>">
+                                            <input type="submit" value="Delete" class="btn btn-danger"
+                                                formaction="/order/delete">
+                                        </td>
+                                    </form>
+                                </tr>
+                                <% } %>
+                        </tbody>
+                    </table>
+                    <form method="post" class="text-center">
+                        <input type="submit" value="Delete All" class="btn btn-danger" formaction="/order/deleteAll">
+                    </form>
+                    <% } %>
+        </div>
+
+        <%- include("parts/footer")%>

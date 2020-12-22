@@ -1,0 +1,62 @@
+<%- include("parts/head")%>
+
+    <%- include("parts/navbar")%>
+
+        <div class="container">
+            <% if(items.length===0) { %>
+                <div class="alert alert-danger mt-2">
+                    <h2>
+                        There is No Orders
+                    </h2>
+                </div>
+                <% } else { %>
+                    <table class="table table-bordered table-dark table-hover mt-2">
+                        <thead>
+                            <th>Number</th>
+                            <th>Product Name</th>
+                            <th>Amount</th>
+                            <th>Cost</th>
+                            <th>status</th>
+                            <th>Address</th>
+                            <th></th>
+                        </thead>
+                        <tbody>
+                            <%for (let i=0; i < items.length; i++) { %>
+                                <tr>
+                                    <td>
+                                        <%= i+1 %>
+                                    </td>
+                                    <td>
+                                        <%- items[i].name %>
+                                    </td>
+                                    <td>
+                                        <%- items[i].amount %>
+                                    </td>
+                                    <td>
+                                        <%- items[i].price * items[i].amount %> $
+                                    </td>
+                                    <form method="post" action="/admin/save">
+                                        <td>
+                                            <input list="status" name="status" placeholder="<%- items[i].status %>" required>
+                                            <datalist id="status">
+                                                <option value="pending">
+                                                <option value="sent">
+                                                <option value="completed">
+                                            </datalist>
+                                        </td>
+                                        <td>
+                                            <%- items[i].address %>
+                                        </td>
+                                        <td>
+                                            <input type="hidden" name="orderid" value="<%- items[i]._id %>">
+                                            <input type="submit" value="Save" class="btn btn-success">
+                                        </td>
+                                    </form>
+                                </tr>
+                                <% } %>
+                        </tbody>
+                    </table>
+                    <% } %>
+        </div>
+
+        <%- include("parts/footer")%>
